@@ -28,10 +28,17 @@ if (process.env.NODE_ENV === "production") {
   // Set static folder
   app.use(express.static("client/build"));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  // app.get("*", (req, res) => {
+  //   res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  // });
+  app.get('*', (req, res) => {
+    res.sendFile(`./front-end/dist/index.html`); // load the single view file (angular will handle the page
+                                                 // changes on the front-end)
   });
 }
+
+
+
 
 // Listen on port - deploying on heroku
 const port = process.env.PORT || 5000;
