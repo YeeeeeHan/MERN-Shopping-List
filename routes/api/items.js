@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../../routes/middleware/auth')
 
 // Item Model
 const Item = require('../../models/Item');
@@ -15,8 +16,8 @@ router.get('/', (req, res) => {  // Don't put api/items because we are already i
 
 // @route POST api/items
 // @desc Create an Item
-// @access Public
-router.post('/', (req, res) => {
+// @access Private
+router.post('/', auth,(req, res) => {
     const newItem = new Item({      // Created in memory
         name: req.body.name
     });
@@ -26,9 +27,9 @@ router.post('/', (req, res) => {
 
 // @route DELETE api/items/:id
 // @desc Delete an Item
-// @access Public
+// @access Private
 router
-    .delete('/:id', (req, res) => {
+    .delete('/:id', auth,(req, res) => {
         Item.findById(req.params.id)        // Way to get id from the URI, returns a promise
             .then(item => item.remove().then(() => res.json({ success: true})))
             .catch(err => res.status(404).json({ success: false}));

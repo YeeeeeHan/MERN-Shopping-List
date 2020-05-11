@@ -6,6 +6,13 @@ import { getItems, deleteItem } from "../actions/itemActions";
 import PropTypes from "prop-types";
 
 class ShoppingList extends Component {
+
+  static propTypes = {
+    getItems: PropTypes.func.isRequired,
+    item: PropTypes.object.isRequired,
+  };
+
+
   componentDidMount() {
     this.props.getItems();
   }
@@ -42,10 +49,6 @@ class ShoppingList extends Component {
   }
 }
 
-ShoppingList.propTypes = {
-  getItems: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired,
-};
 
 const mapStateToProps = (state) => ({
   item: state.item,
