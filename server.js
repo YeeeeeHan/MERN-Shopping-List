@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors');
 const mongoose = require("mongoose");
 const path = require("path");
 
@@ -7,6 +8,9 @@ const items = require("./routes/api/items");
 
 // Init express
 const app = express();
+
+// Support mobile
+app.use(cors());
 
 // BodyParse Middleware
 app.use(express.json());
